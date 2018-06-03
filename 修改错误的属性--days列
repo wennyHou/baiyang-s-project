@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  3 20:07:51 2018
+
+@author: hou
+"""
+#读入我要添加的数据
+import pandas as pd
+days=pd.read_csv(r'C:\Users\hou\Documents\JD\csv_our\alter.csv')
+################读入星姐的数据##################
+dataplus=pd.read_csv(r'C:\Users\hou\Documents\JD\csv_our\dataplus7.csv')
+dataplus1=pd.merge(dataplus,days,on=['user_id','sku_id'],how='left')
+del dataplus1['days_x']
+dataplus=dataplus1.fillna(365)
+cols_name=dataplus.columns.values.tolist()
+cols_name=cols_name[:-2]+[cols_name[-1]]+[cols_name[-2]]
+dataplus=dataplus[cols_name]
+
+
+
